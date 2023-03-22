@@ -1,5 +1,3 @@
-import java.math.MathContext;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -17,16 +15,13 @@ public class Main {
 
         /*2.Написать программу, выводящую факториал числа (произведение чисел от 1 одного до n), заданного с клавиатуры.*/
         System.out.print("Введите число (int), факториал которого Вам нужен: ");
-        int twoNum = in.nextInt();
-        if (twoNum < 0)
-            System.out.println("Факториал определен только для множества целых неотрицательных чисел");
-        else if (twoNum == 0)
-            System.out.println("Факториал 0 равен 1. Ваше ответ: 1");
-        else {
-            int twoFak = 1; //Минимальное значение факториала, при twoNum == 0 || twoNum == 1
-            for (int i = 1; i < twoNum; i++) {
-                twoFak *= (i + 1);
-            }
+        int twoNum;
+        do {
+            twoNum = in.nextInt();
+        } while(twoNum >= 1);
+        int twoFak = 1; //Минимальное значение факториала, при twoNum == 0 || twoNum == 1
+        for (int i = 1; i <= twoNum; i++) { //тут хз что не так, мы выше заставляем пользака вводить, пока не введет что-то больше 0.
+            twoFak *= (i + 1);
             System.out.println("Факториал " + twoNum + " равен: " + twoFak);
         }
 
@@ -36,9 +31,8 @@ public class Main {
             System.out.print(((10 * i) - (3 * i) - 1) + " ");
 
         /*4.Вводится действительное х и натуральное n. Вычислить: sin x + sin x в квадрате + ... sin x в степени n.*/
-        System.out.print("\nВведите действительное x = "); double fourX = in.nextFloat();
+        System.out.print("\nВведите действительное x = "); double fourX = (in.nextFloat()) * (Math.PI/180); //Переводим градусы в радианы
         System.out.print("Введите натуральное n = "); short fourN = in.nextShort();
-        fourX *= Math.PI/180; //Переводим градусы в радианы
         double fourResult = 0;
         if (Math.sin(fourX) == 0) //Не вычисляем константный результат
             System.out.println("Результат вычисления: 0");
@@ -52,16 +46,14 @@ public class Main {
         }
 
         /*5.Вводится натуральное число. Найти сумму четных цифр, входящих в его состав.*/
-        System.out.print("Введите натуральное число: "); short fiveNum = in.nextShort();
-        if (fiveNum <= 0)
-            System.out.println("Отрицательные числа и ноль не относятся к натуральным");
-        else if (fiveNum == 1)
-            System.out.println("Сумма четных цифр, входящих в состав вашего: 0");
-        else {
-            short fiveResult = 0;
-            for (short i = 0; i <= fiveNum; i += 2) {
-                fiveResult += i;
-            }
+        System.out.print("Введите натуральное число: ");
+        short fiveNum = 0;
+        do {
+            fiveNum = in.nextShort();
+        } while(fiveNum > 0);
+        short fiveResult = 0;
+        for (short i = 0; i <= fiveNum; i += 2) {
+            fiveResult += i;
             System.out.println("Сумма четных цифр, входящих в состав вашего: " + fiveResult);
         }
 
@@ -82,7 +74,7 @@ public class Main {
                 sixFibP += sixFibPP;
                 sixFibPP = sixTemp;
             }
-            System.out.println("");//просто перенос строки
+            System.out.println();//просто перенос строки
         }
 
         /*7.Вывести на экран таблицу умножения в виде таблицы*/
@@ -90,12 +82,10 @@ public class Main {
         for (short i = 0; i < 18; i++) { //Каждый цикл - новая строка
             if (i < 9) { //1й ряд столбцов
                 for (short j = 0; j < 4; j++) { //Вывод в рамках строки
-                    if ((sevenN2 < 10) && ((sevenN1 * sevenN2) >= 10)) //все эти условия просто форматирование однозначных и двузначных чисел для выравнивания столбцов
-                        System.out.print(sevenN1 + " x " + sevenN2 + " = " + (sevenN1 * sevenN2) + "    ");
-                    else if ((sevenN1 * sevenN2) < 10)
-                        System.out.print(sevenN1 + " x " + sevenN2 + " =  " + (sevenN1 * sevenN2) + "    ");
+                    if (sevenN2 < 10) //все эти условия просто форматирование однозначных и двузначных чисел для выравнивания столбцов
+                        System.out.print(sevenN1 + " x " + sevenN2 + " = " + (sevenN1 * sevenN2) + "\t");
                     else
-                        System.out.print(sevenN1 + " x " + sevenN2 + "= " + (sevenN1 * sevenN2) + "    ");
+                        System.out.print(sevenN1 + " x " + sevenN2 + "= " + (sevenN1 * sevenN2) + "\t");
                     sevenN1 += 1; //Увеличиваем 1й множитель в рамках строки
                 }
                 sevenN2 += 1; //Увеличиваем 2й множитель к началу каждой строки
@@ -110,9 +100,9 @@ public class Main {
                 sevenN1 = 6; //Восстанавливаем значение 6 для 1го множителя к началу каждой строки
                 for (short j = 0; j < 4; j++) { //Вывод в рамках строки
                     if (sevenN2 < 10) //все эти условия просто форматирование однозначных и двузначных чисел для выравнивания столбцов
-                        System.out.print(sevenN1 + " x " + sevenN2 + " = " + (sevenN1 * sevenN2) + "    ");
+                        System.out.print(sevenN1 + " x " + sevenN2 + " = " + (sevenN1 * sevenN2) + "\t");
                     else
-                        System.out.print(sevenN1 + " x " + sevenN2 + "= " + (sevenN1 * sevenN2) + "    ");
+                        System.out.print(sevenN1 + " x " + sevenN2 + "= " + (sevenN1 * sevenN2) + "\t");
                     sevenN1 += 1; //Увеличиваем 1й множитель в рамках строки
                 }
                 sevenN2 += 1; //Увеличиваем 2й множитель к началу каждой строки
@@ -155,17 +145,15 @@ public class Main {
         /*10.Напечатать все четырехзначные числа, в десятичной записи которых нет двух одинаковых цифр.*/
         int tenServCounter = 0; //Служебный счетчик для переноса каретки
         int tenCounter = 0; //Счетчик для подсчета чисел, удовлетворяющих условию
+        int thousends = 0;
+        int houndrets = 0;
+        int dozens = 0;
+        int units = 0;
         for (int i = 1023; i <= 9876; i++) { //у чисел меньше 1023 и больше 9876 по любому есть повторы
-            MathContext thousends = new MathContext(i/1000);
-            MathContext houndrets = new MathContext((i/100)%10);
-            MathContext dozens = new MathContext((i/10)%10);
-            MathContext units = new MathContext(i%10);
-
-            if (thousends.equals(houndrets)) System.out.print(i + " ");
-//            int thousends = i/1000;
-//            int houndrets = (i/100)%10;
-//            int dozens = (i/10)%10;
-//            int units = i%10;
+            thousends = i/1000;
+            houndrets = (i/100)%10;
+            dozens = (i/10)%10;
+            units = i%10;
             if ((thousends != houndrets) && (thousends != dozens) && (thousends != units)
                 && (houndrets != dozens) && (houndrets != units)
                 && (dozens != units)) {
@@ -235,9 +223,9 @@ public class Main {
         Вот Валентина и обратилась к вам за помощью.*/
 
         //Боюсь представить, насколько это трудно читать.
-        System.out.print("Введите натуральное число, которое будем разбивать на целочисленные положительные делители: "); int twelveNum = in.nextInt();
-        int twelveIter = 1;
-        int twelveTemp = 1;
+        System.out.print("Введите натуральное число, которое будем разбивать на целочисленные положительные делители: "); long twelveNum = in.nextLong();
+        long twelveIter = 1;
+        long twelveTemp = 1;
 
         System.out.print(twelveNum + " 1 ");
 
@@ -261,8 +249,8 @@ public class Main {
         //Обработка 3
         while ((twelveNum % (twelveTemp * 3)) == 0) { //Выводим все делители числа 3, как простого числа и его частное
             twelveTemp *= 3;
-            if ((twelveTemp != twelveNum) && (twelveTemp != 1)) //Убираем повторы
-                if (twelveTemp != (twelveNum /twelveTemp )) {  //Убираем повторы вроде 49 7 7 1
+            if ((twelveTemp != twelveNum) && (twelveTemp != 1)) //тут разные if из-за else далее, в него попадаем при выполнении 1го условия, но невыполнении второго
+                if (twelveTemp != (twelveNum /twelveTemp )) {
                     System.out.print(twelveNum / twelveTemp + " " + twelveTemp + " ");
                     if ((twelveNum / twelveTemp) % 2 == 0)
                         System.out.print(twelveNum / ((twelveNum / twelveTemp) / 2) + " " + ((twelveNum / twelveTemp) / 2) + " ");
@@ -274,9 +262,9 @@ public class Main {
         }
 
         //Обработка простых чисел, кроме 3, цикл гоняем до половины основного числа, далее избыточно
-        for (int i = 0; i <= (twelveNum/2); i++) { //Получаем в цикле простые числа, кроме 3, ее придется обрабатывать отдельно
-            int twelveTemp1 = (6 * i) + 1; //Записываю числа в переменные, дабы дальше исключить излишние расчеты в условиях
-            int twelveTemp2 = (6 * i) + 5;
+        for (long i = 0; i <= (twelveNum/2); i++) { //Получаем в цикле простые числа, кроме 3, ее придется обрабатывать отдельно
+            long twelveTemp1 = (6 * i) + 1; //Записываю числа в переменные, дабы дальше исключить излишние расчеты в условиях
+            long twelveTemp2 = (6 * i) + 5;
             if ((twelveNum % twelveTemp1 == 0) || (twelveNum % twelveTemp2 == 0) && //Если оба числа являются делителями исходного
                 ((twelveTemp1 % 5 != 0) //И 1е не кратно 5 (не может быть = 5)
                         && ((twelveTemp1 % 7 != 0) || (twelveTemp1 == 7)) //И 1е не кратно 7 или не равно 7
@@ -285,14 +273,14 @@ public class Main {
                 )) {
                 if ((twelveNum % twelveTemp1 != 0) || (twelveTemp1 == 1)) //Выясняем которое и записываем в переменную twelveTemp1, 1 всегда перезаписываем
                     twelveTemp1 = twelveTemp2;
-                if (((twelveNum / twelveTemp1) % 2 != 0) || ((twelveNum / twelveTemp1) > (twelveNum / 2))) //Исключаем четные частные, убираем дубликаты из прогона по четным числам
-                    if (twelveNum / twelveTemp1 % 3 != 0) //Исключаем дубликат деления на 3
-                        if (twelveTemp1 != twelveNum) //Убираем повторы вида 13 1 1 13
-                            if ((twelveTemp1 != (twelveNum/((6 * (i + 1)) + 1))) && (twelveTemp1 != (twelveNum/((6 * (i + 1)) + 5))))  //Убираем повторы, в которых делитель и частное - простые числа, например 11 13 13 11
-                                if ((twelveNum / twelveTemp1) == twelveTemp1)
-                                    System.out.print(twelveTemp1 + " ");
-                                else
-                                    System.out.print((twelveNum / twelveTemp1) + " " + twelveTemp1 + " ");
+                if ((((twelveNum / twelveTemp1) % 2 != 0) || ((twelveNum / twelveTemp1) > (twelveNum / 2))) //Исключаем четные частные, убираем дубликаты из прогона по четным числам
+                    && (twelveNum / twelveTemp1 % 3 != 0) //Исключаем дубликат деления на 3
+                    && (twelveTemp1 != twelveNum) //Убираем повторы вида 13 1 1 13
+                    && ((twelveTemp1 != (twelveNum/((6 * (i + 1)) + 1))) && (twelveTemp1 != (twelveNum/((6 * (i + 1)) + 5))))) //Убираем повторы, в которых делитель и частное - простые числа, например 11 13 13 11
+                        if ((twelveNum / twelveTemp1) == twelveTemp1)
+                            System.out.print(twelveTemp1 + " ");
+                        else
+                            System.out.print((twelveNum / twelveTemp1) + " " + twelveTemp1 + " ");
             }
         }
         System.out.println();
